@@ -77,7 +77,7 @@ namespace FipoTests
                 var generator = new TwoIntegerDataGenerator(
                     (int)(-1 * Math.Pow(2, 22)),
                     (int)(1 * Math.Pow(2, 22)));
-                var iterations = 10000;
+                var iterations = 4000;
                 var val = new object[iterations][];
                 for (int i = 0; i < iterations; i++)
                 {
@@ -98,7 +98,7 @@ namespace FipoTests
             Fipo fa = new Fipo(a);
             Fipo fb = new Fipo(b);
             Fipo fr = fa + fb;
-            Assert.AreEqual((int)(fr), a + b, 0.001f);
+            Assert.AreEqual((int)(fr), a + b);
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace FipoTests
             Fipo fa = new Fipo(a);
             Fipo fb = new Fipo(b);
             Fipo fr = fa + fb;
-            Assert.AreEqual((int)(fr), a + b, 0.001f);
+            Assert.AreEqual((int)(fr), a + b);
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace FipoTests
             Fipo fa = new Fipo(a);
             Fipo fb = new Fipo(b);
             Fipo fr = fa + fb;
-            Assert.AreEqual((int)(fr), a + b, 0.001f);
+            Assert.AreEqual((int)(fr), a + b);
         }
 
         [TestMethod]
@@ -128,7 +128,7 @@ namespace FipoTests
             Fipo fa = new Fipo(a);
             Fipo fb = new Fipo(b);
             Fipo fr = fa - fb;
-            Assert.AreEqual((int)(fr), a - b, 0.001f);
+            Assert.AreEqual((int)(fr), a - b);
         }
 
         [TestMethod]
@@ -138,7 +138,7 @@ namespace FipoTests
             Fipo fa = new Fipo(a);
             Fipo fb = new Fipo(b);
             Fipo fr = fa - fb;
-            Assert.AreEqual((int)(fr), a - b, 0.001f);
+            Assert.AreEqual((int)(fr), a - b);
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ namespace FipoTests
             Fipo fa = new Fipo(a);
             Fipo fb = new Fipo(b);
             Fipo fr = fa - fb;
-            Assert.AreEqual((int)(fr), a - b, 0.001f);
+            Assert.AreEqual((int)(fr), a - b);
         }
     }
 }

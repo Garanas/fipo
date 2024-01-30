@@ -55,6 +55,11 @@ namespace FixedPointMath
         public static readonly double ToDoubleFactor = 1.0f / Fipo.FromDoubleFactor;
 
         /// <summary>
+        /// Represents the smallest possible number, useful for assertions.
+        /// </summary>
+        public static readonly float Epsilon = 1.0f * Fipo.ToFloatFactor;
+
+        /// <summary>
         /// Represents the fraction.
         /// </summary>
         [FieldOffset(0)]
