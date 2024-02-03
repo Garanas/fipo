@@ -2,12 +2,34 @@ using Bogus;
 
 namespace FipoTests
 {
-    public class TwoFloatData
+    internal class OneFloatData
+    {
+        public float a;
+    }
+
+    internal class TwoFloatData
     {
         public float a; public float b;
     }
 
-    public class TwoFloatDataGenerator
+    internal class OneFloatDataGenerator
+    {
+        private Faker<OneFloatData> Faker = new Faker<OneFloatData>();
+
+        public OneFloatDataGenerator(float min, float max)
+        {
+            Randomizer.Seed = new Random(6554523);
+            Faker = new Faker<OneFloatData>()
+                .RuleFor(u => u.a, f => Fipo.Epsilon * MathF.Floor((1 / Fipo.Epsilon) * f.Random.Float(min, max)));
+        }
+
+        public OneFloatData GenerateFloats()
+        {
+            return Faker.Generate();
+        }
+    }
+
+    internal class TwoFloatDataGenerator
     {
         private Faker<TwoFloatData> Faker = new Faker<TwoFloatData>();
 
@@ -29,6 +51,23 @@ namespace FipoTests
     public class FloatProperties
     {
 
+        public static IEnumerable<object[]> SmallOneFloatData
+        {
+            get
+            {
+                var generator = new OneFloatDataGenerator((float)(-1 * Math.Pow(2, 8)), (float)(1 * Math.Pow(2, 8)));
+                var iterations = 100;
+                var val = new object[iterations][];
+                for (int i = 0; i < iterations; i++)
+                {
+                    var generated = generator.GenerateFloats();
+                    val[i] = new object[] { generated.a };
+                }
+
+                return val;
+            }
+        }
+
         public static IEnumerable<object[]> SmallTwoFloatData
         {
             get
@@ -41,8 +80,6 @@ namespace FipoTests
                     var generated = generator.GenerateFloats();
                     val[i] = new object[] { generated.a, generated.b };
                 }
-
-                //(int)Math.Pow(2, 32 - (Fipo.Offset + 2))
 
                 return val;
             }
@@ -63,8 +100,6 @@ namespace FipoTests
                     var generated = generator.GenerateFloats();
                     val[i] = new object[] { generated.a, generated.b };
                 }
-
-                //(int)Math.Pow(2, 32 - (Fipo.Offset + 2))
 
                 return val;
             }
@@ -89,6 +124,16 @@ namespace FipoTests
 
                 return val;
             }
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(SmallOneFloatData))]
+        public void Identity(float a)
+        {
+            Fipo fa = new Fipo(a);
+            Fipo fb = new Fipo(0);
+            Fipo fr = fa + fb;
+            Assert.AreEqual((float)(fr), a + 0, Fipo.Epsilon);
         }
 
         [TestMethod]
