@@ -1,56 +1,8 @@
-using Bogus;
-
-namespace FipoTests
+namespace Tests
 {
-    internal class OneFloatData
-    {
-        public float a;
-    }
-
-    internal class TwoFloatData
-    {
-        public float a; public float b;
-    }
-
-    internal class OneFloatDataGenerator
-    {
-        private Faker<OneFloatData> Faker = new Faker<OneFloatData>();
-
-        public OneFloatDataGenerator(float min, float max)
-        {
-            Randomizer.Seed = new Random(6554523);
-            Faker = new Faker<OneFloatData>()
-                .RuleFor(u => u.a, f => Fint.Epsilon * MathF.Floor((1 / Fint.Epsilon) * f.Random.Float(min, max)));
-        }
-
-        public OneFloatData GenerateFloats()
-        {
-            return Faker.Generate();
-        }
-    }
-
-    internal class TwoFloatDataGenerator
-    {
-        private Faker<TwoFloatData> Faker = new Faker<TwoFloatData>();
-
-        public TwoFloatDataGenerator(float min, float max)
-        {
-            Randomizer.Seed = new Random(6554523);
-            Faker = new Faker<TwoFloatData>()
-                .RuleFor(u => u.a, f => Fint.Epsilon * MathF.Floor((1 / Fint.Epsilon) * f.Random.Float(min, max)))
-                .RuleFor(u => u.b, f => Fint.Epsilon * MathF.Floor((1 / Fint.Epsilon) * f.Random.Float(min, max)));
-        }
-
-        public TwoFloatData GenerateFloats()
-        {
-            return Faker.Generate();
-        }
-    }
-
     [TestClass]
     public class FloatProperties
     {
-
         public static IEnumerable<object[]> SmallOneFloatData
         {
             get
