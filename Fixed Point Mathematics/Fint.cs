@@ -30,34 +30,34 @@ namespace FixedPointMath
 
     [DebuggerTypeProxy(typeof(FipoDebugView))]
     [StructLayout(LayoutKind.Explicit, Pack =  4, Size = 4)]
-    public struct Fipo
+    public struct Fint
     {
         public static readonly int Offset = 8;
 
         /// <summary>
         /// Quick-access multiplier for converting from a float to a fixed point number.
         /// </summary>
-        public static readonly float FromFloatFactor = (1 << Fipo.Offset);
+        public static readonly float FromFloatFactor = (1 << Fint.Offset);
 
         /// <summary>
         /// Quick-access multiplier for converting from a fixed point number to a float.
         /// </summary>
-        public static readonly float ToFloatFactor = 1.0f / Fipo.FromFloatFactor;
+        public static readonly float ToFloatFactor = 1.0f / Fint.FromFloatFactor;
 
         /// <summary>
         /// Quick-access multiplier for converting from a double to a fixed point number.
         /// </summary>
-        public static readonly double FromDoubleFactor = (1 << Fipo.Offset);
+        public static readonly double FromDoubleFactor = (1 << Fint.Offset);
 
         /// <summary>
         /// Quick-access multiplier for converting from a fixed point number to a double.
         /// </summary>
-        public static readonly double ToDoubleFactor = 1.0f / Fipo.FromDoubleFactor;
+        public static readonly double ToDoubleFactor = 1.0f / Fint.FromDoubleFactor;
 
         /// <summary>
         /// Represents the smallest possible number, useful for assertions.
         /// </summary>
-        public static readonly float Epsilon = 1.0f * Fipo.ToFloatFactor;
+        public static readonly float Epsilon = 1.0f * Fint.ToFloatFactor;
 
         /// <summary>
         /// Represents the fraction.
@@ -75,16 +75,16 @@ namespace FixedPointMath
         /// Create a fixed point number from an integer.
         /// </summary>
         /// <param name="value"></param>
-        public Fipo (int value)
+        public Fint (int value)
         {
-            this.Value = (value) << (Fipo.Offset);
+            this.Value = (value) << (Fint.Offset);
         }
 
         /// <summary>
         /// Create a fixed point number from a float.
         /// </summary>
         /// <param name="value"></param>
-        public Fipo(float value)
+        public Fint(float value)
         {
             this.Value = (int)(value * FromFloatFactor);
         }
@@ -93,7 +93,7 @@ namespace FixedPointMath
         /// Create a fixed point number from a double.
         /// </summary>
         /// <param name="value"></param>
-        public Fipo(double value)
+        public Fint(double value)
         {
             this.Value = (int)(value * FromDoubleFactor);
         }
@@ -106,9 +106,9 @@ namespace FixedPointMath
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Fipo operator +(Fipo a, Fipo b)
+        public static Fint operator +(Fint a, Fint b)
         {
-            return new Fipo { Value = a.Value + b.Value };
+            return new Fint { Value = a.Value + b.Value };
         }
 
         /// <summary>
@@ -117,9 +117,9 @@ namespace FixedPointMath
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Fipo operator -(Fipo a, Fipo b)
+        public static Fint operator -(Fint a, Fint b)
         {
-            return new Fipo { Value = a.Value - b.Value };
+            return new Fint { Value = a.Value - b.Value };
         }
 
         /// <summary>
@@ -128,9 +128,9 @@ namespace FixedPointMath
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Fipo operator *(Fipo a, Fipo b)
+        public static Fint operator *(Fint a, Fint b)
         {
-            return new Fipo { Value = a.Value - b.Value };
+            return new Fint { Value = a.Value - b.Value };
         }
 
         /// <summary>
@@ -139,9 +139,20 @@ namespace FixedPointMath
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static Fipo operator /(Fipo a, Fipo b)
+        public static Fint operator /(Fint a, Fint b)
         {
-            return new Fipo { Value = a.Value - b.Value };
+            return new Fint { Value = a.Value - b.Value };
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Fint operator %(Fint a, Fint b)
+        {
+            return new Fint { Value = a.Value % b.Value };
         }
 
         //#endregion
@@ -152,54 +163,54 @@ namespace FixedPointMath
         /// Casts a fixed point number to an integer.
         /// </summary>
         /// <param name="a"></param>
-        public static implicit operator int(Fipo a)
+        public static implicit operator int(Fint a)
         {
-            return a.Value >> Fipo.Offset;
+            return a.Value >> Fint.Offset;
         }
 
         /// <summary>
         /// Casts a fixed point number to a float.
         /// </summary>
         /// <param name="a"></param>
-        public static implicit operator float(Fipo a)
+        public static implicit operator float(Fint a)
         {
-            return (float)a.Value * Fipo.ToFloatFactor;
+            return (float)a.Value * Fint.ToFloatFactor;
         }
 
         /// <summary>
         /// Casts a fixed point number to a double.
         /// </summary>
         /// <param name="a"></param>
-        public static implicit operator double(Fipo a)
+        public static implicit operator double(Fint a)
         {
-            return (double)a.Value * Fipo.ToDoubleFactor;
+            return (double)a.Value * Fint.ToDoubleFactor;
         }
 
         /// <summary>
         /// Casts a fixed point number to an integer.
         /// </summary>
         /// <param name="a"></param>
-        public static implicit operator Fipo(int a)
+        public static implicit operator Fint(int a)
         {
-            return new Fipo { Value = a << Fipo.Offset } ;
+            return new Fint { Value = a << Fint.Offset } ;
         }
 
         /// <summary>
         /// Casts a fixed point number to a float.
         /// </summary>
         /// <param name="a"></param>
-        public static implicit operator Fipo(float a)
+        public static implicit operator Fint(float a)
         {
-            return new Fipo { Value = (int)(a * Fipo.FromFloatFactor) };
+            return new Fint { Value = (int)(a * Fint.FromFloatFactor) };
         }
 
         /// <summary>
         /// Casts a fixed point number to a double.
         /// </summary>
         /// <param name="a"></param>
-        public static implicit operator Fipo(double a)
+        public static implicit operator Fint(double a)
         {
-            return new Fipo { Value = (int)(a * Fipo.FromDoubleFactor) };
+            return new Fint { Value = (int)(a * Fint.FromDoubleFactor) };
         }
 
         //#endregion
@@ -211,9 +222,9 @@ namespace FixedPointMath
         ///// </summary>
         ///// <param name="a"></param>
         ///// <returns></returns>
-        //public static Fipo Floor(Fipo a)
+        //public static Fint Floor(Fint a)
         //{
-        //    return new Fipo { Upper = a.Upper };
+        //    return new Fint { Upper = a.Upper };
         //}
 
         ///// <summary>
@@ -221,9 +232,9 @@ namespace FixedPointMath
         ///// </summary>
         ///// <param name="a"></param>
         ///// <returns></returns>
-        //public static Fipo Ceil(Fipo a)
+        //public static Fint Ceil(Fint a)
         //{
-        //    return new Fipo { Upper = (short)(a.Upper + 1) };
+        //    return new Fint { Upper = (short)(a.Upper + 1) };
         //}
 
         ///// <summary>
@@ -231,9 +242,9 @@ namespace FixedPointMath
         ///// </summary>
         ///// <param name="a"></param>
         ///// <returns></returns>
-        //public static Fipo Abs(Fipo a)
+        //public static Fint Abs(Fint a)
         //{
-        //    return new Fipo { AllBits = Math.Abs(a.AllBits) };
+        //    return new Fint { AllBits = Math.Abs(a.AllBits) };
         //}
 
         /// <summary>
@@ -241,10 +252,10 @@ namespace FixedPointMath
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static Fipo SquareRoot(Fipo a)
+        public static Fint SquareRoot(Fint a)
         {
             double intermediate = (double)a;
-            return new Fipo(Math.Sqrt(intermediate));
+            return new Fint(Math.Sqrt(intermediate));
         }
 
 
@@ -261,7 +272,7 @@ namespace FixedPointMath
 
             // The constructor for the type proxy class must have a
             // constructor that takes the target type as a parameter.
-            public FipoDebugView(Fipo a)
+            public FipoDebugView(Fint a)
             {
                 Value = (float)a;
             }

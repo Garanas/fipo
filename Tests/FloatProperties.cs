@@ -20,7 +20,7 @@ namespace FipoTests
         {
             Randomizer.Seed = new Random(6554523);
             Faker = new Faker<OneFloatData>()
-                .RuleFor(u => u.a, f => Fipo.Epsilon * MathF.Floor((1 / Fipo.Epsilon) * f.Random.Float(min, max)));
+                .RuleFor(u => u.a, f => Fint.Epsilon * MathF.Floor((1 / Fint.Epsilon) * f.Random.Float(min, max)));
         }
 
         public OneFloatData GenerateFloats()
@@ -37,8 +37,8 @@ namespace FipoTests
         {
             Randomizer.Seed = new Random(6554523);
             Faker = new Faker<TwoFloatData>()
-                .RuleFor(u => u.a, f => Fipo.Epsilon * MathF.Floor((1 / Fipo.Epsilon) * f.Random.Float(min, max)))
-                .RuleFor(u => u.b, f => Fipo.Epsilon * MathF.Floor((1 / Fipo.Epsilon) * f.Random.Float(min, max)));
+                .RuleFor(u => u.a, f => Fint.Epsilon * MathF.Floor((1 / Fint.Epsilon) * f.Random.Float(min, max)))
+                .RuleFor(u => u.b, f => Fint.Epsilon * MathF.Floor((1 / Fint.Epsilon) * f.Random.Float(min, max)));
         }
 
         public TwoFloatData GenerateFloats()
@@ -120,7 +120,7 @@ namespace FipoTests
                     val[i] = new object[] { generated.a, generated.b };
                 }
 
-                //(int)Math.Pow(2, 32 - (Fipo.Offset + 2))
+                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
 
                 return val;
             }
@@ -130,70 +130,70 @@ namespace FipoTests
         [DynamicData(nameof(SmallOneFloatData))]
         public void Identity(float a)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(0);
-            Fipo fr = fa + fb;
-            Assert.AreEqual((float)(fr), a + 0, Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(0);
+            Fint fr = fa + fb;
+            Assert.AreEqual((float)(fr), a + 0, Fint.Epsilon);
         }
 
         [TestMethod]
         [DynamicData(nameof(SmallTwoFloatData))]
         public void AdditionSmall(float a, float b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa + fb;
-            Assert.AreEqual((float)(fr), a + b, Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa + fb;
+            Assert.AreEqual((float)(fr), a + b, Fint.Epsilon);
         }
 
         [TestMethod]
         [DynamicData(nameof(MediumTwoFloatData))]
         public void AdditionMedium(float a, float b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa + fb;
-            Assert.AreEqual((float)(fr), a + b,  Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa + fb;
+            Assert.AreEqual((float)(fr), a + b,  Fint.Epsilon);
         }
 
         [TestMethod]
         [DynamicData(nameof(LargeTwoFloatData))]
         public void AdditionLarge(float a, float b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa + fb;
-            Assert.AreEqual((float)(fr), a + b, Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa + fb;
+            Assert.AreEqual((float)(fr), a + b, Fint.Epsilon);
         }
 
         [TestMethod]
         [DynamicData(nameof(SmallTwoFloatData))]
         public void SubtractionSmall(float a, float b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa - fb;
-            Assert.AreEqual((float)(fr), a - b, Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa - fb;
+            Assert.AreEqual((float)(fr), a - b, Fint.Epsilon);
         }
 
         [TestMethod]
         [DynamicData(nameof(MediumTwoFloatData))]
         public void SubtractionMedium(float a, float b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa - fb;
-            Assert.AreEqual((float)(fr), a - b, Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa - fb;
+            Assert.AreEqual((float)(fr), a - b, Fint.Epsilon);
         }
 
         [TestMethod]
         [DynamicData(nameof(LargeTwoFloatData))]
         public void SubtractionLarge(float a, float b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa - fb;
-            Assert.AreEqual((float)(fr), a - b, Fipo.Epsilon);
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa - fb;
+            Assert.AreEqual((float)(fr), a - b, Fint.Epsilon);
         }
     }
 }

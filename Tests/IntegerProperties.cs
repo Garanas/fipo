@@ -42,7 +42,7 @@ namespace FipoTests
                     val[i] = new object[] { generated.a, generated.b };
                 }
 
-                //(int)Math.Pow(2, 32 - (Fipo.Offset + 2))
+                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
 
                 return val;
             }
@@ -64,7 +64,7 @@ namespace FipoTests
                     val[i] = new object[] { generated.a, generated.b };
                 }
 
-                //(int)Math.Pow(2, 32 - (Fipo.Offset + 2))
+                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
 
                 return val;
             }
@@ -85,7 +85,7 @@ namespace FipoTests
                     val[i] = new object[] { generated.a, generated.b };
                 }
 
-                //(int)Math.Pow(2, 32 - (Fipo.Offset + 2))
+                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
 
                 return val;
             }
@@ -95,9 +95,9 @@ namespace FipoTests
         [DynamicData(nameof(SmallTwoIntegerData))]
         public void AdditionSmall(int a, int b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa + fb;
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa + fb;
             Assert.AreEqual((int)(fr), a + b);
         }
 
@@ -105,9 +105,9 @@ namespace FipoTests
         [DynamicData(nameof(MediumTwoIntegerData))]
         public void AdditionMedium(int a, int b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa + fb;
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa + fb;
             Assert.AreEqual((int)(fr), a + b);
         }
 
@@ -115,9 +115,9 @@ namespace FipoTests
         [DynamicData(nameof(LargeTwoIntegerData))]
         public void AdditionLarge(int a, int b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa + fb;
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa + fb;
             Assert.AreEqual((int)(fr), a + b);
         }
 
@@ -125,9 +125,9 @@ namespace FipoTests
         [DynamicData(nameof(SmallTwoIntegerData))]
         public void SubtractionSmall(int a, int b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa - fb;
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa - fb;
             Assert.AreEqual((int)(fr), a - b);
         }
 
@@ -135,9 +135,9 @@ namespace FipoTests
         [DynamicData(nameof(MediumTwoIntegerData))]
         public void SubtractionMedium(int a, int b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa - fb;
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa - fb;
             Assert.AreEqual((int)(fr), a - b);
         }
 
@@ -145,9 +145,9 @@ namespace FipoTests
         [DynamicData(nameof(LargeTwoIntegerData))]
         public void SubtractionLarge(int a, int b)
         {
-            Fipo fa = new Fipo(a);
-            Fipo fb = new Fipo(b);
-            Fipo fr = fa - fb;
+            Fint fa = new Fint(a);
+            Fint fb = new Fint(b);
+            Fint fr = fa - fb;
             Assert.AreEqual((int)(fr), a - b);
         }
     }
