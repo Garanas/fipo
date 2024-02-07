@@ -24,7 +24,7 @@ namespace Tests
     }
 
     [TestClass]
-    internal class IntegerProperties
+    public class IntegerProperties
     {
 
         public static IEnumerable<object[]> SmallTwoIntegerData

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Tests.Generators
 {
-    internal class OneFloatData
+    public class OneFloatData
     {
         public float a;
     }
 
-    internal class OneFloatDataGenerator
+    public class OneFloatDataGenerator
     {
         private Faker<OneFloatData> Faker = new Faker<OneFloatData>();
 

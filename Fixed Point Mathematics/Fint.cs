@@ -223,8 +223,10 @@ namespace FixedPointMath
         /// <param name="a"></param>
         /// <returns></returns>
         public static Fint Floor(Fint a)
-        { 
-            return new Fint { Value = a.Value & 0x7FFFFF00 };
+        {
+            Fint fa = new Fint(a);
+            fa.Lower = 0;
+            return fa;
         }
 
         /// <summary>
@@ -232,15 +234,16 @@ namespace FixedPointMath
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public static Fint Ceil(Fint a)
+        public static Fint Ceiling(Fint a)
         {
+            Fint fa = Fint.Floor(a);
             if ((a.Value & 0x0000000FF) > 0)
             {
-                return new Fint { Value = a.Value + 1 };
+                return fa + 1;
             }
             else
             {
-                return new Fint { Value = a.Value };
+                return fa;
             }
         }
 
@@ -251,7 +254,7 @@ namespace FixedPointMath
         /// <returns></returns>
         public static Fint Abs(Fint a)
         {
-            return new Fint { Value = a.Value & 0x7FFFFFFF };
+            return new Fint { Value = Math.Abs(a.Value) };
         }
 
         /// <summary>

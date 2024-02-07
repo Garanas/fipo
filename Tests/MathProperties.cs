@@ -1,7 +1,7 @@
 ﻿namespace Tests
 {
     [TestClass]
-    internal class MathProperties
+    public class MathProperties
     {
         public static IEnumerable<object[]> SmallOneFloatData
         {
@@ -26,7 +26,25 @@
         {
             Fint fa = new Fint(a);
             Fint fl = Fint.Floor(fa);
-            Assert.AreEqual((float)(fl), MathF.Floor(a));
+            Assert.AreEqual(MathF.Floor(a), (float)fl);
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(SmallOneFloatData))]
+        public void CeilingSmall(float a)
+        {
+            Fint fa = new Fint(a);
+            Fint fl = Fint.Ceiling(fa);
+            Assert.AreEqual(MathF.Ceiling(a), (float)fl);
+        }
+
+        [TestMethod]
+        [DynamicData(nameof(SmallOneFloatData))]
+        public void AbsSmall(float a)
+        {
+            Fint fa = new Fint(a);
+            Fint fl = Fint.Abs(fa);
+            Assert.AreEqual(MathF.Abs(a), (float)fl);
         }
     }
 }

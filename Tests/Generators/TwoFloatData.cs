@@ -1,12 +1,12 @@
 ﻿
 namespace Tests.Generators
 {
-    internal class TwoFloatData
+    public class TwoFloatData
     {
         public float a; public float b;
     }
 
-    internal class TwoFloatDataGenerator
+    public class TwoFloatDataGenerator
     {
         private Faker<TwoFloatData> Faker = new Faker<TwoFloatData>();
 
