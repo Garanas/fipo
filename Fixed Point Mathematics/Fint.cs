@@ -29,7 +29,7 @@ namespace FixedPointMath
     // https://vanhunteradams.com/FixedPoint/FixedPoint.html
 
     [DebuggerTypeProxy(typeof(FipoDebugView))]
-    [StructLayout(LayoutKind.Explicit, Pack =  4, Size = 4)]
+    [StructLayout(LayoutKind.Explicit, Pack = 4, Size = 4)]
     public struct Fint
     {
         public static readonly int Offset = 8;
@@ -75,7 +75,7 @@ namespace FixedPointMath
         /// Create a fixed point number from an integer.
         /// </summary>
         /// <param name="value"></param>
-        public Fint (int value)
+        public Fint(int value)
         {
             this.Value = (value) << (Fint.Offset);
         }
@@ -192,7 +192,7 @@ namespace FixedPointMath
         /// <param name="a"></param>
         public static implicit operator Fint(int a)
         {
-            return new Fint { Value = a << Fint.Offset } ;
+            return new Fint { Value = a << Fint.Offset };
         }
 
         /// <summary>
@@ -217,35 +217,42 @@ namespace FixedPointMath
 
         //#region Math functions
 
-        ///// <summary>
-        ///// Drop the fractions of the fixed point number.
-        ///// </summary>
-        ///// <param name="a"></param>
-        ///// <returns></returns>
-        //public static Fint Floor(Fint a)
-        //{
-        //    return new Fint { Upper = a.Upper };
-        //}
+        /// <summary>
+        /// Drop the fractions of the fixed point number.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static Fint Floor(Fint a)
+        { 
+            return new Fint { Value = a.Value & 0x7FFFFF00 };
+        }
 
-        ///// <summary>
-        ///// Drop the fractions of the fixed point number.
-        ///// </summary>
-        ///// <param name="a"></param>
-        ///// <returns></returns>
-        //public static Fint Ceil(Fint a)
-        //{
-        //    return new Fint { Upper = (short)(a.Upper + 1) };
-        //}
+        /// <summary>
+        /// Drop the fractions of the fixed point number.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static Fint Ceil(Fint a)
+        {
+            if ((a.Value & 0x0000000FF) > 0)
+            {
+                return new Fint { Value = a.Value + 1 };
+            }
+            else
+            {
+                return new Fint { Value = a.Value };
+            }
+        }
 
-        ///// <summary>
-        ///// Drop the sign.
-        ///// </summary>
-        ///// <param name="a"></param>
-        ///// <returns></returns>
-        //public static Fint Abs(Fint a)
-        //{
-        //    return new Fint { AllBits = Math.Abs(a.AllBits) };
-        //}
+        /// <summary>
+        /// Drop the sign.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public static Fint Abs(Fint a)
+        {
+            return new Fint { Value = a.Value & 0x7FFFFFFF };
+        }
 
         /// <summary>
         /// Compute the square root of a fixed point number.
@@ -257,7 +264,6 @@ namespace FixedPointMath
             double intermediate = (double)a;
             return new Fint(Math.Sqrt(intermediate));
         }
-
 
         //#endregion
 

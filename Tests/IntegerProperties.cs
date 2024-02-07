@@ -1,6 +1,4 @@
-using Bogus;
-
-namespace FipoTests
+namespace Tests
 {
     public class TwoIntegerData
     {
@@ -26,7 +24,7 @@ namespace FipoTests
     }
 
     [TestClass]
-    public class IntegerProperties
+    internal class IntegerProperties
     {
 
         public static IEnumerable<object[]> SmallTwoIntegerData
@@ -41,8 +39,6 @@ namespace FipoTests
                     var generated = generator.GenerateIntegers();
                     val[i] = new object[] { generated.a, generated.b };
                 }
-
-                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
 
                 return val;
             }
@@ -64,8 +60,6 @@ namespace FipoTests
                     val[i] = new object[] { generated.a, generated.b };
                 }
 
-                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
-
                 return val;
             }
         }
@@ -84,8 +78,6 @@ namespace FipoTests
                     var generated = generator.GenerateIntegers();
                     val[i] = new object[] { generated.a, generated.b };
                 }
-
-                //(int)Math.Pow(2, 32 - (Fint.Offset + 2))
 
                 return val;
             }
